@@ -1,7 +1,8 @@
 package Package;
 
 import javafx.application.Application;
-import javafx.scene.Group;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -20,7 +21,7 @@ import java.util.Collection;
 public class Main extends Application {
 
     public static void main(String[] args)  {
-        //launch(args);
+        launch(args);
 
         GameField gameField = new GameField();
 
@@ -41,12 +42,29 @@ public class Main extends Application {
             }
             System.out.println();
         }
+        new KeyboardInput();
+
+
+
     }
 
+    Group root = new Group();
 
-    @Override
+
     public void start(Stage stage) throws Exception {
+        Scene scene = new Scene(root, 300, 300);
 
+        Button startButton = new Button("Начать игру");
+
+        startButton.setOnAction(event -> startButton.setText("Произошло нажатие"));
+
+        root.getChildren().add(startButton);
+
+
+        stage.setTitle("2048");
+        stage.setScene(scene);
+        stage.show();
     }
+
 
 }

@@ -76,7 +76,6 @@ public class GameField {
             //присвоил новую линию
             setLine(y, newLine);
         }
-        //
     }
 
     public void right() {
