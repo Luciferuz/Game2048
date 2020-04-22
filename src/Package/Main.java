@@ -24,6 +24,12 @@ public class Main extends Application {
         launch(args);
 
         GameField gameField = new GameField();
+        gameField.createNewCell();
+        gameField.createNewCell();
+        gameField.createNewCell();
+        gameField.createNewCell();
+        gameField.createNewCell();
+        gameField.createNewCell();
 
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
@@ -32,7 +38,7 @@ public class Main extends Application {
             System.out.println();
         }
 
-        System.out.println("sssssss");
+        System.out.println("AFTER LEFT");
 
         gameField.left();
 

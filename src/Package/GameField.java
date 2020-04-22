@@ -53,6 +53,8 @@ public class GameField {
             if (newLine[0] == newLine[1] && newLine[2] == newLine[3]) {
                 newLine[0] = newLine[0] * 2;
                 newLine[1] = newLine[2] * 2;
+                newLine[2] = 0;
+                newLine[3] = 0;
             }
 
             if (newLine[0] == newLine[1] && newLine[2] != newLine[3]) {
