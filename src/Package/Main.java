@@ -40,7 +40,7 @@ public class Main extends Application {
 
         System.out.println("AFTER LEFT");
 
-        gameField.left();
+        gameField.down();
 
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
@@ -62,9 +62,18 @@ public class Main extends Application {
 
         Button startButton = new Button("Начать игру");
 
-        startButton.setOnAction(event -> startButton.setText("Произошло нажатие"));
+        startButton.setOnAction(event -> {
+            startButton.setText("Произошло нажатие");
+            buttonLeftPressed();
+        });
 
         root.getChildren().add(startButton);
+
+        JButton button = new JButton();
+        JLabel label = new JLabel();
+        label.setIcon(new ImageIcon("/images/left.png"));
+        button.add(label);
+
 
 
         stage.setTitle("2048");
@@ -72,5 +81,20 @@ public class Main extends Application {
         stage.show();
     }
 
+    public void buttonLeftPressed() {
+
+    }
+
+    public void buttonRightPressed() {
+
+    }
+
+    public void buttonUpPressed() {
+
+    }
+
+    public void buttonDownPressed() {
+
+    }
 
 }
