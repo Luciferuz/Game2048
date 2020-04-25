@@ -3,12 +3,15 @@ package Package;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
@@ -54,27 +57,26 @@ public class Main extends Application {
 
     }
 
-    Group root = new Group();
-
 
     public void start(Stage stage) throws Exception {
+
+
+        //Button startButton = new Button("Начать игру");
+
+        //startButton.setOnAction(event -> {
+        //    startButton.setText("Произошло нажатие");
+       //     buttonLeftPressed();
+       // });
+
+        //root.getChildren().add(startButton);
+
+        Group group = new Group();
+
+        Parent content = FXMLLoader.load(getClass().getResource("Untitled1.fxml"));
+        BorderPane root = new BorderPane();
         Scene scene = new Scene(root, 300, 300);
-
-        Button startButton = new Button("Начать игру");
-
-        startButton.setOnAction(event -> {
-            startButton.setText("Произошло нажатие");
-            buttonLeftPressed();
-        });
-
-        root.getChildren().add(startButton);
-
-        JButton button = new JButton();
-        JLabel label = new JLabel();
-        label.setIcon(new ImageIcon("/images/left.png"));
-        button.add(label);
-
-
+        root.setCenter(content);
+        group.getChildren().add(root);
 
         stage.setTitle("2048");
         stage.setScene(scene);

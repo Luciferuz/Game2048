@@ -12,6 +12,7 @@ public class GameField {
                 field[i][j] = 0;
             }
         }
+        //создал первые 2 ячейки
         createNewCell();
         createNewCell();
     }
