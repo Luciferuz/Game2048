@@ -1,5 +1,4 @@
 package Package;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,36 +24,11 @@ public class Main extends Application {
 
     public static void main(String[] args)  {
         launch(args);
-
         GameField gameField = new GameField();
-        gameField.createNewCell();
-        gameField.createNewCell();
-        gameField.createNewCell();
-        gameField.createNewCell();
-        gameField.createNewCell();
-        gameField.createNewCell();
 
-        for (int y = 0; y < 4; y++) {
-            for (int x = 0; x < 4; x++) {
-                System.out.print(gameField.getCell(x, y));
-            }
-            System.out.println();
+        while(true) {
+
         }
-
-        System.out.println("AFTER LEFT");
-
-        gameField.down();
-
-        for (int y = 0; y < 4; y++) {
-            for (int x = 0; x < 4; x++) {
-                System.out.print(gameField.getCell(x, y));
-            }
-            System.out.println();
-        }
-        new KeyboardInput();
-
-
-
     }
 
 
@@ -70,9 +44,10 @@ public class Main extends Application {
 
         //root.getChildren().add(startButton);
 
+
         Group group = new Group();
 
-        Parent content = FXMLLoader.load(getClass().getResource("Untitled1.fxml"));
+        Parent content = FXMLLoader.load(getClass().getResource("/src/Package/Untitled1.fxml"));
         BorderPane root = new BorderPane();
         Scene scene = new Scene(root, 300, 300);
         root.setCenter(content);

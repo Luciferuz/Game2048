@@ -17,7 +17,7 @@ public class GameField {
         createNewCell();
     }
 
-    public void createNewCell() {
+    private void createNewCell() {
         while (true) {
             int x = (int) ( Math.random() * countCellsX );
             int y = (int) ( Math.random() * countCellsY );
@@ -28,14 +28,13 @@ public class GameField {
         }
     }
 
-    public int getCell(int x, int y) {
+    private int getCell(int x, int y) {
         return field[x][y];
     }
 
-    public void setCell(int x, int y, int value) {
+    private void setCell(int x, int y, int value) {
         field[x][y] = value;
     }
-
 
     public void left() {
         //переместил все влево, игнорируя нули
@@ -213,13 +212,13 @@ public class GameField {
         }
     }
 
-    public void setLine(int y, int[] line) {
+    private void setLine(int y, int[] line) {
         for (int x = 0; x < countCellsX; x++){
             field[x][y] = line[x];
         }
     }
 
-    public int[] getLine(int y) {
+    private int[] getLine(int y) {
         int[] line = new int[countCellsX];
         for (int x = 0; x < countCellsX; x++) {
             line[x] = field[x][y];
@@ -227,13 +226,13 @@ public class GameField {
         return line;
     }
 
-    public void setColumn (int x, int[] column) {
+    private void setColumn (int x, int[] column) {
         for (int y = 0; y < countCellsY; y++) {
             field[x][y] = column[y];
         }
     }
 
-    public int[] getColumn(int x) {
+    private int[] getColumn(int x) {
         int[] column = new int[countCellsY];
         for (int y = 0; y < countCellsY; y++) {
             column[y] = field[x][y];
@@ -241,7 +240,7 @@ public class GameField {
         return column;
     }
 
-    public boolean isMoved(int[][] before, int[][] after) { //было ли передвижение, чтобы создавать новую ячейку
+    private boolean isMoved(int[][] before, int[][] after) { //было ли передвижение, чтобы создавать новую ячейку
         return before != after;
     }
 
