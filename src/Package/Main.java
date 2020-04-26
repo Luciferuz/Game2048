@@ -26,9 +26,6 @@ public class Main extends Application {
         launch(args);
         GameField gameField = new GameField();
 
-        while(true) {
-
-        }
     }
 
 
