@@ -1,5 +1,4 @@
 package Package;
-
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,10 +26,13 @@ public class GameField {
     public ImageView cell33;
 
     private int[][] field;
-    private static final int countCellsX = 4;
-    private static final int countCellsY = 4;
+    private int countCellsX;
+    private int countCellsY;
 
-    public GameField() { //заполнил массив игрового поля ячейками 0
+    public GameField(int countX, int countY) { //заполнил массив игрового поля ячейками 0
+        countCellsX = countX;
+        countCellsY = countY;
+
         field = new int[countCellsX][countCellsY];
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field.length; j++) {
@@ -358,8 +360,5 @@ public class GameField {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
     }
-
-
 }
