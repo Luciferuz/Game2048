@@ -361,4 +361,9 @@ public class GameField {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    public void exit() {
+        System.out.println("Нажата кнопка выхода, надо включить первый стартовый экран");
+    }
 }

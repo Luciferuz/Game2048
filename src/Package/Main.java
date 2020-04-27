@@ -20,14 +20,24 @@ public class Main extends Application {
         Parent content = FXMLLoader.load(getClass().getResource("/Package/gameinterface.fxml"));
         BorderPane root = new BorderPane();
         root.setCenter(content);
-        Scene scene = new Scene(root, 650, 450);
+        Scene scene = new Scene(root, 570, 393);
         stage.setTitle("2048");
         stage.setScene(scene);
         stage.show();
     }
 
-    public void launcher() {
+    public void launcherScreen() throws Exception {
+        new GameField();
+        Parent content = FXMLLoader.load(getClass().getResource("/Package/startscreen.fxml"));
+        ////////////////
+        ////////////////
 
+    }
+
+    public void gameScreen() throws Exception {
+        Parent content = FXMLLoader.load(getClass().getResource("/Package/gameinterface.fxml"));
+        ////////////////
+        ////////////////
     }
 
 }
