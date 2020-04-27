@@ -17,7 +17,7 @@ public class Main extends Application {
 
 
     public void start(Stage stage) throws Exception {
-        Parent content = FXMLLoader.load(getClass().getResource("/Package/content1.fxml"));
+        Parent content = FXMLLoader.load(getClass().getResource("/Package/gameinterface.fxml"));
         BorderPane root = new BorderPane();
         root.setCenter(content);
         Scene scene = new Scene(root, 650, 450);
