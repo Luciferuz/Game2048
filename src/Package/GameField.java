@@ -26,12 +26,12 @@ public class GameField {
     public ImageView cell33;
 
     private int[][] field;
-    private int countCellsX;
-    private int countCellsY;
+    private static final int countCellsX = 4;
+    private static final int countCellsY = 4;
 
-    public GameField(int countX, int countY) { //заполнил массив игрового поля ячейками 0
-        countCellsX = countX;
-        countCellsY = countY;
+    public GameField() { //заполнил массив игрового поля ячейками 0
+        //countCellsX = countX;
+        //countCellsY = countY;
 
         field = new int[countCellsX][countCellsY];
         for (int i = 0; i < field.length; i++) {

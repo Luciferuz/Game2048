@@ -17,13 +17,17 @@ public class Main extends Application {
 
 
     public void start(Stage stage) throws Exception {
-        Parent content = FXMLLoader.load(getClass().getResource("/Package/content.fxml"));
+        Parent content = FXMLLoader.load(getClass().getResource("/Package/content1.fxml"));
         BorderPane root = new BorderPane();
         root.setCenter(content);
         Scene scene = new Scene(root, 650, 450);
         stage.setTitle("2048");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void launcher() {
+
     }
 
 }
