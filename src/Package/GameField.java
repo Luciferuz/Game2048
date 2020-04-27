@@ -4,10 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.Objects;
 
 public class GameField {
 

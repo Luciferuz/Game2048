@@ -28,82 +28,82 @@
       </ImageView>
       <ImageView fx:id="cell20" fitHeight="80.0" fitWidth="80.0" layoutX="187.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/nothing.png" />
+            <Image url="@../images/0.png" />
          </image>
       </ImageView>
       <ImageView fx:id="cell10" fitHeight="80.0" fitWidth="80.0" layoutX="107.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/nothing.png" />
+            <Image url="@../images/0.png" />
          </image>
       </ImageView>
       <ImageView fx:id="cell12" fitHeight="80.0" fitWidth="80.0" layoutX="107.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/nothing.png" />
+            <Image url="@../images/0.png" />
          </image>
       </ImageView>
       <ImageView fx:id="cell02" fitHeight="80.0" fitWidth="80.0" layoutX="27.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/nothing.png" />
+            <Image url="@../images/0.png" />
          </image>
       </ImageView>
       <ImageView fx:id="cell11" fitHeight="80.0" fitWidth="80.0" layoutX="107.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/nothing.png" />
+            <Image url="@../images/0.png" />
          </image>
       </ImageView>
       <ImageView fx:id="cell01" fitHeight="80.0" fitWidth="80.0" layoutX="27.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/nothing.png" />
+            <Image url="@../images/0.png" />
          </image>
       </ImageView>
       <ImageView fx:id="cell00" fitHeight="80.0" fitWidth="80.0" layoutX="27.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/nothing.png" />
+            <Image url="@../images/0.png" />
          </image>
       </ImageView>
       <ImageView fx:id="cell21" fitHeight="80.0" fitWidth="80.0" layoutX="187.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/nothing.png" />
+            <Image url="@../images/0.png" />
          </image>
       </ImageView>
       <ImageView fx:id="cell22" fitHeight="80.0" fitWidth="80.0" layoutX="187.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/nothing.png" />
+            <Image url="@../images/0.png" />
          </image>
       </ImageView>
       <ImageView fx:id="cell30" fitHeight="80.0" fitWidth="80.0" layoutX="267.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/nothing.png" />
+            <Image url="@../images/0.png" />
          </image>
       </ImageView>
       <ImageView fx:id="cell31" fitHeight="80.0" fitWidth="80.0" layoutX="267.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/nothing.png" />
+            <Image url="@../images/0.png" />
          </image>
       </ImageView>
       <ImageView fx:id="cell32" fitHeight="80.0" fitWidth="80.0" layoutX="267.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/nothing.png" />
+            <Image url="@../images/0.png" />
          </image>
       </ImageView>
       <ImageView fx:id="cell03" fitHeight="80.0" fitWidth="80.0" layoutX="27.0" layoutY="301.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/nothing.png" />
+            <Image url="@../images/0.png" />
          </image>
       </ImageView>
       <ImageView fx:id="cell13" fitHeight="80.0" fitWidth="80.0" layoutX="107.0" layoutY="301.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/nothing.png" />
+            <Image url="@../images/0.png" />
          </image>
       </ImageView>
       <ImageView fx:id="cell23" fitHeight="80.0" fitWidth="80.0" layoutX="187.0" layoutY="301.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/nothing.png" />
+            <Image url="@../images/0.png" />
          </image>
       </ImageView>
       <ImageView fx:id="cell33" fitHeight="80.0" fitWidth="80.0" layoutX="267.0" layoutY="301.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/nothing.png" />
+            <Image url="@../images/0.png" />
          </image>
       </ImageView>
    </children>
