@@ -1,5 +1,32 @@
 package Package;
+
+import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Objects;
+
 public class GameField {
+
+    public ImageView cell00;
+    public ImageView cell10;
+    public ImageView cell20;
+    public ImageView cell30;
+    public ImageView cell01;
+    public ImageView cell11;
+    public ImageView cell21;
+    public ImageView cell31;
+    public ImageView cell02;
+    public ImageView cell12;
+    public ImageView cell22;
+    public ImageView cell32;
+    public ImageView cell03;
+    public ImageView cell13;
+    public ImageView cell23;
+    public ImageView cell33;
 
     private int[][] field;
     private static final int countCellsX = 4;
@@ -243,5 +270,98 @@ public class GameField {
     private boolean isMoved(int[][] before, int[][] after) { //было ли передвижение, чтобы создавать новую ячейку
         return before != after;
     }
+
+
+    @FXML
+    public void clickUp() {
+        up();
+        System.out.println("Up");
+        createNewCell();
+        updateUI();
+    }
+    @FXML
+    public void clickDown() {
+        down();
+        System.out.println("Down");
+        createNewCell();
+        updateUI();
+    }
+    @FXML
+    public void clickRight() {
+        right();
+        System.out.println("Right");
+        createNewCell();
+        updateUI();
+    }
+    @FXML
+    public void clickLeft() {
+        left();
+        System.out.println("Left");
+        createNewCell();
+        updateUI();
+    }
+    @FXML
+    public void keyboardPress(KeyEvent keyEvent) {
+        System.out.println("кнопка на клавиатуре");
+        System.out.println(keyEvent.getCode().isArrowKey());
+        System.out.println(keyEvent.getCode().getChar());
+
+        switch (keyEvent.getCode()) {
+            case W: {
+                clickUp();
+                break;
+            }
+            case A: {
+                clickLeft();
+                break;
+            }
+            case S: {
+                clickDown();
+                break;
+            }
+            case D: {
+                clickRight();
+                break;
+            }
+        }
+    }
+
+    public void updateUI() {
+        /*for (int y = 0; y < countCellsY; y++) {
+            for (int x = 0; x < countCellsX; x++) {
+
+                switch (field[x][y]) {
+                    case 0: {
+                        String cellxy = "cell" + "x" + "y";
+                        new ImageView(cellxy).setImage(new Image(new FileInputStream("src/images/up.png")));
+                    }
+                }
+
+            }
+        } */
+        try {
+            cell00.setImage(new Image(new FileInputStream("src/images/" + field[0][0] + ".png")));
+            cell01.setImage(new Image(new FileInputStream("src/images/" + field[0][1] + ".png")));
+            cell02.setImage(new Image(new FileInputStream("src/images/" + field[0][2] + ".png")));
+            cell03.setImage(new Image(new FileInputStream("src/images/" + field[0][3] + ".png")));
+            cell10.setImage(new Image(new FileInputStream("src/images/" + field[1][0] + ".png")));
+            cell11.setImage(new Image(new FileInputStream("src/images/" + field[1][1] + ".png")));
+            cell12.setImage(new Image(new FileInputStream("src/images/" + field[1][2] + ".png")));
+            cell13.setImage(new Image(new FileInputStream("src/images/" + field[1][3] + ".png")));
+            cell20.setImage(new Image(new FileInputStream("src/images/" + field[2][0] + ".png")));
+            cell21.setImage(new Image(new FileInputStream("src/images/" + field[2][1] + ".png")));
+            cell22.setImage(new Image(new FileInputStream("src/images/" + field[2][2] + ".png")));
+            cell23.setImage(new Image(new FileInputStream("src/images/" + field[2][3] + ".png")));
+            cell30.setImage(new Image(new FileInputStream("src/images/" + field[3][0] + ".png")));
+            cell31.setImage(new Image(new FileInputStream("src/images/" + field[3][1] + ".png")));
+            cell32.setImage(new Image(new FileInputStream("src/images/" + field[3][2] + ".png")));
+            cell33.setImage(new Image(new FileInputStream("src/images/" + field[3][3] + ".png")));
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 }

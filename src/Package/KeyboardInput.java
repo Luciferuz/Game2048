@@ -12,7 +12,7 @@ public class KeyboardInput {
     public KeyboardInput() {
         finalMenu.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent evt) {
-                System.out.println(evt.getKeyCode());
+
                 System.exit(1);
             }
         });
