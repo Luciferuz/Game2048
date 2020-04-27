@@ -18,7 +18,7 @@
       </ImageView>
       <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="410.0" layoutY="250.0" onMouseClicked="#clickLeft" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/left.jpg" />
+            <Image url="@../images/left.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="470.0" layoutY="310.0" onMouseClicked="#clickDown" pickOnBounds="true" preserveRatio="true">
