@@ -33,12 +33,7 @@ public class GameField {
         //countCellsX = countX;
         //countCellsY = countY;
 
-        field = new int[countCellsX][countCellsY];
-        for (int i = 0; i < field.length; i++) {
-            for (int j = 0; j < field.length; j++) {
-                field[i][j] = 0;
-            }
-        }
+        clear();
         //создал первые 2 ячейки
         createNewCell();
         createNewCell();
@@ -55,12 +50,31 @@ public class GameField {
         }
     }
 
+    private void clear() {
+        field = new int[countCellsX][countCellsY];
+        for (int i = 0; i < field.length; i++) {
+            for (int j = 0; j < field.length; j++) {
+                field[i][j] = 0;
+            }
+        }
+    }
+
     private int getCell(int x, int y) {
         return field[x][y];
     }
 
     private void setCell(int x, int y, int value) {
         field[x][y] = value;
+    }
+
+
+    public void move(String direction) {
+        switch (direction) {
+            case "up" :
+            case "left" : {
+
+            }
+        }
     }
 
     public void left() {
@@ -364,6 +378,7 @@ public class GameField {
 
     @FXML
     public void exit() {
-        System.out.println("Нажата кнопка выхода, надо включить первый стартовый экран");
+        clear();
+        System.out.println("Нажата кнопка выхода, надо включить первый стартовый экран и очитстить поле до этого");
     }
 }
