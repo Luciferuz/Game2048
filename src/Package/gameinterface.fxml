@@ -10,22 +10,22 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyboardPress" prefHeight="393.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Package.GameField">
    <children>
-      <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="500.0" layoutY="250.0" onMouseClicked="#clickRight" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="500.0" layoutY="250.0" onMouseClicked="#right" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/right.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="440.0" layoutY="190.0" onMouseClicked="#clickUp" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="440.0" layoutY="190.0" onMouseClicked="#up" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/up.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="380.0" layoutY="250.0" onMouseClicked="#clickLeft" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="380.0" layoutY="250.0" onMouseClicked="#left" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/left.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="440.0" layoutY="310.0" onMouseClicked="#clickDown" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="440.0" layoutY="310.0" onMouseClicked="#down" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/down.png" />
          </image>

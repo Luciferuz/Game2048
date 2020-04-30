@@ -29,14 +29,13 @@ public class GameField {
     private static final int countCellsX = 4;
     private static final int countCellsY = 4;
 
-    public GameField() { //заполнил массив игрового поля ячейками 0
+    public GameField() {
         //countCellsX = countX;
         //countCellsY = countY;
-
         clear();
-        //создал первые 2 ячейки
         createNewCell();
         createNewCell();
+        //updateUI();
     }
 
     private void createNewCell() {
@@ -48,6 +47,34 @@ public class GameField {
                 break;
             }
         }
+        //updateUI();
+    }
+
+    //////////////////////////////////
+    //          куда-нибудь добавить проверку
+    //
+    //  if (isWinEndOfGame())   System.out.println("Набралось число 2048, победа");
+    //  if (noMoreEmptyCells()) System.out.println("Не осталось свободных ячеек, проигрыш");
+    ///////////////////////////////////
+
+    private boolean isWinEndOfGame() {
+        //проверяю все ячейки на наличие ыигрышной(2048)
+        for (int x = 0; x < countCellsX; x++) {
+            for (int y = 0; y < countCellsY; y++) {
+                if (field[x][y] == 2048) return true;
+            }
+        }
+       return false;
+    }
+
+    private boolean noMoreEmptyCells() {
+        //проверяю все ячейки на наличие пустой/свободной
+        for (int x = 0; x < countCellsX; x++) {
+            for (int y = 0; y < countCellsY; y++) {
+                if (field[x][y] == 0) return false;
+            }
+        }
+      return true;
     }
 
     private void clear() {
@@ -59,198 +86,144 @@ public class GameField {
         }
     }
 
-    private int getCell(int x, int y) {
-        return field[x][y];
+    private void move(String direction) {
+        updateUI();
+        int[][] beforeMove = setArray(field);
+        switch (direction) {
+            case "up" : {
+                for (int x = 0; x < countCellsX; x++) {
+                    int[] newArray = new int[countCellsY];
+                    int index = 0;
+                    for (int y = 0; y < countCellsY; y++) {
+                        if (field[x][y] != 0) {
+                            newArray[index] = field[x][y];
+                            index++;
+                        }
+                    }
+                    for (int i = index; i < countCellsY; i++) newArray[i] = 0;
+                    setColumn(x, ifNeedSum(newArray, direction));
+                }
+                break;
+            }
+            case "left" : {
+                for (int y = 0; y < countCellsY; y++) {
+                    int[] newArray = new int[countCellsX];
+                    int index = 0;
+                    for (int x = 0; x < countCellsX; x++) {
+                        if (field[x][y] != 0) {
+                            newArray[index] = field[x][y];
+                            index++;
+                        }
+                    }
+                    for (int i = index; i < countCellsX; i++) newArray[i] = 0;
+                    setLine(y, ifNeedSum(newArray, direction));
+                }
+                break;
+            }
+            case "right" : {
+                for (int y = 0; y < countCellsY; y++) {
+                    int[] newArray = new int[countCellsX];
+                    int index = 3;
+                    for (int x = 3; x >= 0; x--) {
+                        if (field[x][y] != 0) {
+                            newArray[index] = field[x][y];
+                            index--;
+                        }
+                    }
+                    for (int i = index; i >= 0; i--) newArray[i] = 0;
+                    setLine(y, ifNeedSum(newArray, direction));
+                }
+                break;
+            }
+            case "down" : {
+                for (int x = 0; x < countCellsX; x++) {
+                    int[] newArray = new int[countCellsY];
+                    int index = 3;
+                    for (int y = 3; y >= 0; y--) {
+                        if (field[x][y] != 0) {
+                            newArray[index] = field[x][y];
+                            index--;
+                        }
+                    }
+                    for (int i = index; i >= 0; i--) newArray[i] = 0;
+                    setColumn(x, ifNeedSum(newArray, direction));
+                }
+            }
+        }
+        if (isMoved(beforeMove, field)) createNewCell();
+        updateUI();
     }
 
-    private void setCell(int x, int y, int value) {
-        field[x][y] = value;
-    }
-
-
-    public void move(String direction) {
+    private int[] ifNeedSum(int[] array, String direction) { //тут использовать константы чтобы лучше читалось
         switch (direction) {
             case "up" :
             case "left" : {
+                if (array[0] == array[1] && array[2] == array[3]) {
+                    array[0] = array[0] * 2;
+                    array[1] = array[2] * 2;
+                    array[2] = 0;
+                    array[3] = 0;
+                }
+                if (array[0] == array[1] && array[2] != array[3]) {
+                    array[0] = array[0] * 2;
+                    array[1] = array[2];
+                    array[2] = array[3];
+                    array[3] = 0;
+                }
+                if (array[0] != array[1] && array[1] == array[2]) {
+                    array[1] = array[1] * 2;
+                    array[2] = array[3];
+                    array[3] = 0;
+                }
+                if (array[0] != array[1] && array[1] != array[2] && array[2] == array[3]) {
+                    array[2] = array[2] * 2;
+                    array[3] = 0;
+                }
+                break;
+            }
 
+            case "down" :
+            case "right" : {
+                if (array[3] == array[2] && array[1] == array[0]) {
+                    array[3] = array[3] * 2;
+                    array[2] = array[1] * 2;
+                    array[1] = 0;
+                    array[0] = 0;
+                }
+                if (array[3] == array[2] && array[1] != array[0]) {
+                    array[3] = array[3] * 2;
+                    array[2] = array[1];
+                    array[1] = array[0];
+                    array[0] = 0;
+                }
+                if (array[3] != array[2] && array[2] == array[1]) {
+                    array[2] = array[2] * 2;
+                    array[1] = array[0];
+                    array[0] = 0;
+                }
+                if (array[3] != array[2] && array[2] != array[1] && array[1] == array[0]) {
+                    array[1] = array[1] * 2;
+                    array[0] = 0;
+                }
             }
         }
+        return array;
     }
 
     public void left() {
-        //переместил все влево, игнорируя нули
-        for (int y = 0; y < countCellsY; y++) {
-            int[] newLine = new int[countCellsX];
-            int index = 0;
-            for (int x = 0; x < countCellsX; x++) {
-                if (field[x][y] != 0) {
-                    newLine[index] = field[x][y];
-                    index++;
-                }
-            }
-            for (int i = index; i < countCellsX; i++) newLine[i] = 0;
-
-            //если нужно складываю
-            if (newLine[0] == newLine[1] && newLine[2] == newLine[3]) {
-                newLine[0] = newLine[0] * 2;
-                newLine[1] = newLine[2] * 2;
-                newLine[2] = 0;
-                newLine[3] = 0;
-            }
-
-            if (newLine[0] == newLine[1] && newLine[2] != newLine[3]) {
-                newLine[0] = newLine[0] * 2;
-                newLine[1] = newLine[2];
-                newLine[2] = newLine[3];
-                newLine[3] = 0;
-            }
-
-            if (newLine[0] != newLine[1] && newLine[1] == newLine[2]) {
-                newLine[1] = newLine[1] * 2;
-                newLine[2] = newLine[3];
-                newLine[3] = 0;
-            }
-
-            if (newLine[0] != newLine[1] && newLine[1] != newLine[2] && newLine[2] == newLine[3]) {
-                newLine[2] = newLine[2] * 2;
-                newLine[3] = 0;
-            }
-
-            //присвоил новую линию
-            setLine(y, newLine);
-        }
+        move("left");
     }
 
     public void right() {
-        //переместил все вправо, игнорируя нули
-        for (int y = 0; y < countCellsY; y++) {
-            int[] newLine = new int[countCellsX];
-            int index = 3;
-            for (int x = 3; x >= 0; x--) {
-                if (field[x][y] != 0) {
-                    newLine[index] = field[x][y];
-                    index--;
-                }
-            }
-            for (int i = index; i >= 0; i--) newLine[i] = 0;
-
-            //если нужно складываю
-            if (newLine[3] == newLine[2] && newLine[1] == newLine[0]) {
-                newLine[3] = newLine[3] * 2;
-                newLine[2] = newLine[1] * 2;
-                newLine[1] = 0;
-                newLine[0] = 0;
-            }
-
-            if (newLine[3] == newLine[2] && newLine[1] != newLine[0]) {
-                newLine[3] = newLine[3] * 2;
-                newLine[2] = newLine[1];
-                newLine[1] = newLine[0];
-                newLine[0] = 0;
-            }
-
-            if (newLine[3] != newLine[2] && newLine[2] == newLine[1]) {
-                newLine[2] = newLine[2] * 2;
-                newLine[1] = newLine[0];
-                newLine[0] = 0;
-            }
-
-            if (newLine[3] != newLine[2] && newLine[2] != newLine[1] && newLine[1] == newLine[0]) {
-                newLine[1] = newLine[1] * 2;
-                newLine[0] = 0;
-            }
-
-            //присвоил новую линию
-            setLine(y, newLine);
-        }
+        move("right");
     }
 
     public void down() {
-        //переместил все вниз, игнорируя нули
-        for (int x = 0; x < countCellsX; x++) {
-            int[] newColumn = new int[countCellsY];
-            int index = 3;
-            for (int y = 3; y >= 0; y--) {
-                if (field[x][y] != 0) {
-                    newColumn[index] = field[x][y];
-                    index--;
-                }
-            }
-            for (int i = index; i >= 0; i--) newColumn[i] = 0;
-
-            //если нужно складываю
-            if (newColumn[3] == newColumn[2] && newColumn[1] == newColumn[0]) {
-                newColumn[3] = newColumn[3] * 2;
-                newColumn[2] = newColumn[1] * 2;
-                newColumn[1] = 0;
-                newColumn[0] = 0;
-            }
-
-            if (newColumn[3] == newColumn[2] && newColumn[1] != newColumn[0]) {
-                newColumn[3] = newColumn[3] * 2;
-                newColumn[2] = newColumn[1];
-                newColumn[1] = newColumn[0];
-                newColumn[0] = 0;
-            }
-
-            if (newColumn[3] != newColumn[2] && newColumn[2] == newColumn[1]) {
-                newColumn[2] = newColumn[2] * 2;
-                newColumn[1] = newColumn[0];
-                newColumn[0] = 0;
-            }
-
-            if (newColumn[3] != newColumn[2] && newColumn[2] != newColumn[1] && newColumn[1] == newColumn[0]) {
-                newColumn[1] = newColumn[1] * 2;
-                newColumn[0] = 0;
-            }
-
-            //присвоил новый столбец
-            setColumn(x, newColumn);
-        }
+        move("down");
     }
 
     public void up() {
-        //переместил все вверх, игнорируя нули
-        for (int x = 0; x < countCellsX; x++) {
-            int[] newColumn = new int[countCellsY];
-            int index = 0;
-            for (int y = 0; y < countCellsY; y++) {
-                if (field[x][y] != 0) {
-                    newColumn[index] = field[x][y];
-                    index++;
-                }
-            }
-            for (int i = index; i < countCellsY; i++) newColumn[i] = 0;
-
-            //если нужно складываю
-            if (newColumn[0] == newColumn[1] && newColumn[2] == newColumn[3]) {
-                newColumn[0] = newColumn[0] * 2;
-                newColumn[1] = newColumn[2] * 2;
-                newColumn[2] = 0;
-                newColumn[3] = 0;
-            }
-
-            if (newColumn[0] == newColumn[1] && newColumn[2] != newColumn[3]) {
-                newColumn[0] = newColumn[0] * 2;
-                newColumn[1] = newColumn[2];
-                newColumn[2] = newColumn[3];
-                newColumn[3] = 0;
-            }
-
-            if (newColumn[0] != newColumn[1] && newColumn[1] == newColumn[2]) {
-                newColumn[1] = newColumn[1] * 2;
-                newColumn[2] = newColumn[3];
-                newColumn[3] = 0;
-            }
-
-            if (newColumn[0] != newColumn[1] && newColumn[1] != newColumn[2] && newColumn[2] == newColumn[3]) {
-                newColumn[2] = newColumn[2] * 2;
-                newColumn[3] = 0;
-            }
-
-            //присвоил новый столбец
-            setColumn(x, newColumn);
-        }
+        move("up");
     }
 
     private void setLine(int y, int[] line) {
@@ -259,88 +232,30 @@ public class GameField {
         }
     }
 
-    private int[] getLine(int y) {
-        int[] line = new int[countCellsX];
-        for (int x = 0; x < countCellsX; x++) {
-            line[x] = field[x][y];
-        }
-        return line;
-    }
-
     private void setColumn (int x, int[] column) {
         for (int y = 0; y < countCellsY; y++) {
             field[x][y] = column[y];
         }
     }
 
-    private int[] getColumn(int x) {
-        int[] column = new int[countCellsY];
-        for (int y = 0; y < countCellsY; y++) {
-            column[y] = field[x][y];
+    private int[][] setArray(int[][] array) {
+        int[][] newArray = new int[countCellsX][countCellsY];
+        for (int x = 0; x < countCellsX; x++) {
+            System.arraycopy(array[x], 0, newArray[x], 0, countCellsY);
         }
-        return column;
+        return newArray;
     }
 
     private boolean isMoved(int[][] before, int[][] after) { //было ли передвижение, чтобы создавать новую ячейку
-        return before != after;
-    }
-
-
-    @FXML
-    public void clickUp() {
-        up();
-        System.out.println("Up");
-        createNewCell();
-        updateUI();
-    }
-    @FXML
-    public void clickDown() {
-        down();
-        System.out.println("Down");
-        createNewCell();
-        updateUI();
-    }
-    @FXML
-    public void clickRight() {
-        right();
-        System.out.println("Right");
-        createNewCell();
-        updateUI();
-    }
-    @FXML
-    public void clickLeft() {
-        left();
-        System.out.println("Left");
-        createNewCell();
-        updateUI();
-    }
-    @FXML
-    public void keyboardPress(KeyEvent keyEvent) {
-        System.out.println("кнопка на клавиатуре");
-        System.out.println(keyEvent.getCode().isArrowKey());
-        System.out.println(keyEvent.getCode().getChar());
-
-        switch (keyEvent.getCode()) {
-            case W: {
-                clickUp();
-                break;
-            }
-            case A: {
-                clickLeft();
-                break;
-            }
-            case S: {
-                clickDown();
-                break;
-            }
-            case D: {
-                clickRight();
-                break;
+        for (int x = 0; x < countCellsX; x++) {
+            for (int y = 0; y < countCellsY; y++) {
+              if (before[x][y] != after[x][y]) return true;
             }
         }
+        return false;
     }
 
-    public void updateUI() {
+    private void updateUI() {
         /*for (int y = 0; y < countCellsY; y++) {
             for (int x = 0; x < countCellsX; x++) {
 
@@ -377,8 +292,34 @@ public class GameField {
     }
 
     @FXML
+    public void keyboardPress(KeyEvent keyEvent) {
+        System.out.println("кнопка на клавиатуре");
+        System.out.println(keyEvent.getCode().isArrowKey());
+        System.out.println(keyEvent.getCode().getChar());
+
+        switch (keyEvent.getCode()) {
+            case W: {
+                up();
+                break;
+            }
+            case A: {
+                left();
+                break;
+            }
+            case S: {
+                down();
+                break;
+            }
+            case D: {
+                right();
+                break;
+            }
+        }
+    }
+
+    @FXML
     public void exit() {
-        clear();
         System.out.println("Нажата кнопка выхода, надо включить первый стартовый экран и очитстить поле до этого");
+        System.exit(0);
     }
 }
