@@ -1,4 +1,5 @@
 package Package;
+
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,12 +27,12 @@ public class GameField {
     public ImageView cell33;
 
     private int[][] field;
-    private static final int countCellsX = 4;
-    private static final int countCellsY = 4;
+    private int countCellsX = 4;
+    private int countCellsY = 4;
 
-    public GameField() {
-        //countCellsX = countX;
-        //countCellsY = countY;
+    public GameField(int countX, int countY) {
+        countCellsX = countX;
+        countCellsY = countY;
         clear();
         createNewCell();
         createNewCell();
@@ -40,8 +41,8 @@ public class GameField {
 
     private void createNewCell() {
         while (true) {
-            int x = (int) ( Math.random() * countCellsX );
-            int y = (int) ( Math.random() * countCellsY );
+            int x = (int) (Math.random() * countCellsX);
+            int y = (int) (Math.random() * countCellsY);
             if (field[x][y] == 0) {
                 field[x][y] = 2;
                 break;
@@ -50,12 +51,12 @@ public class GameField {
         //updateUI();
     }
 
-    //////////////////////////////////
-    //          куда-нибудь добавить проверку
-    //
-    //  if (isWinEndOfGame())   System.out.println("Набралось число 2048, победа");
-    //  if (noMoreEmptyCells()) System.out.println("Не осталось свободных ячеек, проигрыш");
-    ///////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    //          куда-нибудь добавить проверку                                                   //
+    //                                                                                          //
+    //  if (isWinEndOfGame())   System.out.println("Набралось число 2048, победа");             //
+    //  if (noMoreEmptyCells()) System.out.println("Не осталось свободных ячеек, проигрыш");    //
+    //////////////////////////////////////////////////////////////////////////////////////////////
 
     private boolean isWinEndOfGame() {
         //проверяю все ячейки на наличие ыигрышной(2048)
@@ -64,7 +65,7 @@ public class GameField {
                 if (field[x][y] == 2048) return true;
             }
         }
-       return false;
+        return false;
     }
 
     private boolean noMoreEmptyCells() {
@@ -74,7 +75,7 @@ public class GameField {
                 if (field[x][y] == 0) return false;
             }
         }
-      return true;
+        return true;
     }
 
     private void clear() {
@@ -90,7 +91,7 @@ public class GameField {
         updateUI();
         int[][] beforeMove = setArray(field);
         switch (direction) {
-            case "up" : {
+            case "up": {
                 for (int x = 0; x < countCellsX; x++) {
                     int[] newArray = new int[countCellsY];
                     int index = 0;
@@ -105,7 +106,7 @@ public class GameField {
                 }
                 break;
             }
-            case "left" : {
+            case "left": {
                 for (int y = 0; y < countCellsY; y++) {
                     int[] newArray = new int[countCellsX];
                     int index = 0;
@@ -120,7 +121,7 @@ public class GameField {
                 }
                 break;
             }
-            case "right" : {
+            case "right": {
                 for (int y = 0; y < countCellsY; y++) {
                     int[] newArray = new int[countCellsX];
                     int index = 3;
@@ -135,7 +136,7 @@ public class GameField {
                 }
                 break;
             }
-            case "down" : {
+            case "down": {
                 for (int x = 0; x < countCellsX; x++) {
                     int[] newArray = new int[countCellsY];
                     int index = 3;
@@ -156,54 +157,54 @@ public class GameField {
 
     private int[] ifNeedSum(int[] array, String direction) { //тут использовать константы чтобы лучше читалось
         switch (direction) {
-            case "up" :
-            case "left" : {
-                if (array[0] == array[1] && array[2] == array[3]) {
-                    array[0] = array[0] * 2;
-                    array[1] = array[2] * 2;
-                    array[2] = 0;
-                    array[3] = 0;
+            case "up":
+            case "left": {
+                if (array[countCellsX - 4] == array[countCellsX - 3] && array[countCellsX - 2] == array[countCellsX - 1]) {
+                    array[countCellsX - 4] = array[countCellsX - 4] * 2;
+                    array[countCellsX - 3] = array[countCellsX - 2] * 2;
+                    array[countCellsX - 2] = 0;
+                    array[countCellsX - 1] = 0;
                 }
-                if (array[0] == array[1] && array[2] != array[3]) {
-                    array[0] = array[0] * 2;
-                    array[1] = array[2];
-                    array[2] = array[3];
-                    array[3] = 0;
+                if (array[countCellsX - 4] == array[countCellsX - 3] && array[countCellsX - 2] != array[countCellsX - 1]) {
+                    array[countCellsX - 4] = array[countCellsX - 4] * 2;
+                    array[countCellsX - 3] = array[countCellsX - 2];
+                    array[countCellsX - 2] = array[countCellsX - 1];
+                    array[countCellsX - 1] = 0;
                 }
-                if (array[0] != array[1] && array[1] == array[2]) {
-                    array[1] = array[1] * 2;
-                    array[2] = array[3];
-                    array[3] = 0;
+                if (array[countCellsX - 4] != array[countCellsX - 3] && array[countCellsX - 3] == array[countCellsX - 2]) {
+                    array[countCellsX - 3] = array[countCellsX - 3] * 2;
+                    array[countCellsX - 2] = array[countCellsX - 1];
+                    array[countCellsX - 1] = 0;
                 }
-                if (array[0] != array[1] && array[1] != array[2] && array[2] == array[3]) {
-                    array[2] = array[2] * 2;
-                    array[3] = 0;
+                if (array[countCellsX - 4] != array[countCellsX - 3] && array[countCellsX - 3] != array[countCellsX - 2] && array[countCellsX - 2] == array[countCellsX - 1]) {
+                    array[countCellsX - 2] = array[countCellsX - 2] * 2;
+                    array[countCellsX - 1] = 0;
                 }
                 break;
             }
 
-            case "down" :
-            case "right" : {
-                if (array[3] == array[2] && array[1] == array[0]) {
-                    array[3] = array[3] * 2;
-                    array[2] = array[1] * 2;
-                    array[1] = 0;
-                    array[0] = 0;
+            case "down":
+            case "right": {
+                if (array[countCellsY - 1] == array[countCellsY - 2] && array[countCellsY - 3] == array[countCellsY - 4]) {
+                    array[countCellsY - 1] = array[countCellsY - 1] * 2;
+                    array[countCellsY - 2] = array[countCellsY - 3] * 2;
+                    array[countCellsY - 3] = 0;
+                    array[countCellsY - 4] = 0;
                 }
-                if (array[3] == array[2] && array[1] != array[0]) {
-                    array[3] = array[3] * 2;
-                    array[2] = array[1];
-                    array[1] = array[0];
-                    array[0] = 0;
+                if (array[countCellsY - 1] == array[countCellsY - 2] && array[countCellsY - 3] != array[countCellsY - 4]) {
+                    array[countCellsY - 1] = array[countCellsY - 1] * 2;
+                    array[countCellsY - 2] = array[countCellsY - 3];
+                    array[countCellsY - 3] = array[countCellsY - 4];
+                    array[countCellsY - 4] = 0;
                 }
-                if (array[3] != array[2] && array[2] == array[1]) {
-                    array[2] = array[2] * 2;
-                    array[1] = array[0];
-                    array[0] = 0;
+                if (array[countCellsY - 1] != array[countCellsY - 2] && array[countCellsY - 2] == array[countCellsY - 3]) {
+                    array[countCellsY - 2] = array[countCellsY - 2] * 2;
+                    array[countCellsY - 3] = array[countCellsY - 4];
+                    array[countCellsY - 4] = 0;
                 }
-                if (array[3] != array[2] && array[2] != array[1] && array[1] == array[0]) {
-                    array[1] = array[1] * 2;
-                    array[0] = 0;
+                if (array[countCellsY - 1] != array[countCellsY - 2] && array[countCellsY - 2] != array[countCellsY - 3] && array[countCellsY - 3] == array[countCellsY - 4]) {
+                    array[countCellsY - 3] = array[countCellsY - 3] * 2;
+                    array[countCellsY - 4] = 0;
                 }
             }
         }
@@ -227,12 +228,12 @@ public class GameField {
     }
 
     private void setLine(int y, int[] line) {
-        for (int x = 0; x < countCellsX; x++){
+        for (int x = 0; x < countCellsX; x++) {
             field[x][y] = line[x];
         }
     }
 
-    private void setColumn (int x, int[] column) {
+    private void setColumn(int x, int[] column) {
         for (int y = 0; y < countCellsY; y++) {
             field[x][y] = column[y];
         }
@@ -249,7 +250,7 @@ public class GameField {
     private boolean isMoved(int[][] before, int[][] after) { //было ли передвижение, чтобы создавать новую ячейку
         for (int x = 0; x < countCellsX; x++) {
             for (int y = 0; y < countCellsY; y++) {
-              if (before[x][y] != after[x][y]) return true;
+                if (before[x][y] != after[x][y]) return true;
             }
         }
         return false;
@@ -291,8 +292,7 @@ public class GameField {
         }
     }
 
-    @FXML
-    public void keyboardPress(KeyEvent keyEvent) {
+    public void keyboardPress(KeyEvent keyEvent) { //не работает, исправить
         System.out.println("кнопка на клавиатуре");
         System.out.println(keyEvent.getCode().isArrowKey());
         System.out.println(keyEvent.getCode().getChar());
@@ -316,6 +316,7 @@ public class GameField {
             }
         }
     }
+
 
     @FXML
     public void exit() {
