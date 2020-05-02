@@ -1,12 +1,10 @@
 package Package;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class Main extends Application {
@@ -18,7 +16,7 @@ public class Main extends Application {
         launch(args);
         GameField gameField = new GameField(4,4);
     }
-    @Override
+
     public void start(Stage stage) throws Exception {
         //this.stage = stage;
         //this.stage.setTitle("2048");
