@@ -9,12 +9,16 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-    //private BorderPane root;
-    //private Stage stage;
+    private GameField gameField;
+    private int[][] field;
+    private Graphics userInterface;
 
     public static void main(String[] args) {
         launch(args);
-        GameField gameField = new GameField(4,4);
+
+        gameField = new GameField(4,4, 2048);
+        field = gameField.getField();
+
     }
 
     public void start(Stage stage) throws Exception {
@@ -22,20 +26,19 @@ public class Main extends Application {
         //this.stage.setTitle("2048");
         //launcherScreen();
 
-
         Parent content = FXMLLoader.load(getClass().getResource("/Package/gameinterface.fxml"));
         BorderPane root = new BorderPane();
         root.setCenter(content);
 
+
         Scene scene = new Scene(root, 570, 393);
-        //scene.getRoot().requestFocus();
+        scene.getRoot().requestFocus();
         stage.setTitle("2048");
         stage.setScene(scene);
         stage.show();
     }
 
     public void launcherScreen()  {
-        new GameField(4,4);
         //try {
         //    Parent content = FXMLLoader.load(getClass().getResource("/Package/startscreen.fxml"));
         //    root.setCenter(content);
@@ -50,9 +53,6 @@ public class Main extends Application {
 
     }
 
-    public void gameScreen() throws Exception { //не пригодится
-
-    }
 
     public void startGame() throws IOException { //при нажатии на кнопку старт в стартскрин вызывается метод и открывается игровое поле
 
