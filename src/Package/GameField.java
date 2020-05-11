@@ -7,6 +7,8 @@ public class GameField {
     private int countCellsY;
     private int winCase;
 
+    private enum DIRECTION {LEFT, RIGHT, UP, DOWN}
+
     public GameField(int countX, int countY, int winSum) {
         countCellsX = countX;
         countCellsY = countY;
@@ -37,25 +39,25 @@ public class GameField {
     }
 
     public void left() {
-        move("left");
+        move(DIRECTION.LEFT);
     }
 
     public void right() {
-        move("right");
+        move(DIRECTION.RIGHT);
     }
 
     public void down() {
-        move("down");
+        move(DIRECTION.DOWN);
     }
 
     public void up() {
-        move("up");
+        move(DIRECTION.UP);
     }
 
-    private void move(String direction) {
+    private void move(DIRECTION direction) {
         int[][] beforeMove = setArray(field);
         switch (direction) {
-            case "up": {
+            case UP: {
                 for (int x = 0; x < countCellsX; x++) {
                     int[] newArray = new int[countCellsY];
                     int index = 0;
@@ -70,7 +72,7 @@ public class GameField {
                 }
                 break;
             }
-            case "left": {
+            case LEFT: {
                 for (int y = 0; y < countCellsY; y++) {
                     int[] newArray = new int[countCellsX];
                     int index = 0;
@@ -85,7 +87,7 @@ public class GameField {
                 }
                 break;
             }
-            case "right": {
+            case RIGHT: {
                 for (int y = 0; y < countCellsY; y++) {
                     int[] newArray = new int[countCellsX];
                     int index = newArray.length - 1;
@@ -100,7 +102,7 @@ public class GameField {
                 }
                 break;
             }
-            case "down": {
+            case DOWN: {
                 for (int x = 0; x < countCellsX; x++) {
                     int[] newArray = new int[countCellsY];
                     int index = newArray.length - 1;
@@ -118,13 +120,13 @@ public class GameField {
         if (isMoved(beforeMove, field)) createNewCell();
     }
 
-    private int[] ifNeedSum(int[] array, String direction) {
+    private int[] ifNeedSum(int[] array, DIRECTION direction) {
         int length = array.length;
 
         switch (direction) { //если соседние равны, то делаем манипуляции, потом будут нули в массиве
-            case "up" :
-            case "left" : {
-                for (int i = 0; i < length; i++) {
+            case UP :
+            case LEFT : {
+                for (int i = 0; i < length - 1; i++) {
                     if (array[i] == array[i + 1]) {
                         array[i] = array[i] * 2;
                         array[i + 1] = 0;
@@ -134,8 +136,8 @@ public class GameField {
                 break;
             }
 
-            case "down" :
-            case "right" : {
+            case DOWN :
+            case RIGHT : {
                 for (int i = length - 1; i > 0; i--) {
                     if (array[i] == array[i - 1]) {
                         array[i] = array[i] * 2;

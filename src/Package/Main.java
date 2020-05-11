@@ -10,25 +10,27 @@ import java.io.IOException;
 public class Main extends Application {
 
     private GameField gameField;
-    private int[][] field;
     private Graphics userInterface;
+    private int[][] field;
 
     public static void main(String[] args) {
         launch(args);
-
-        gameField = new GameField(4,4, 2048);
-        field = gameField.getField();
-
     }
 
+    @Override
     public void start(Stage stage) throws Exception {
-        //this.stage = stage;
-        //this.stage.setTitle("2048");
-        //launcherScreen();
+        gameField = new GameField(4,4, 2048);
 
-        Parent content = FXMLLoader.load(getClass().getResource("/Package/gameinterface.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Package/gameinterface.fxml"));
+        Parent content = loader.load();
+        Controller controller = loader.getController();
+
+        controller.setGameField(gameField);
+        controller.setGraphics(userInterface);
+
         BorderPane root = new BorderPane();
         root.setCenter(content);
+        //тут двойной цикл для картинок addChildren в pane
 
 
         Scene scene = new Scene(root, 570, 393);

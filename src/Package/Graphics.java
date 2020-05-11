@@ -31,7 +31,7 @@ public class Graphics {
 
     public void updateUI() {
         try {
-            cell00.setImage(new Image(new FileInputStream("src/images/" + field[0][0] + ".png")));
+            cell00.setImage(new Image(new FileInputStream("src/images/" + field[0][0] + ".png"))); //лучше в hashmap
             cell01.setImage(new Image(new FileInputStream("src/images/" + field[0][1] + ".png")));
             cell02.setImage(new Image(new FileInputStream("src/images/" + field[0][2] + ".png")));
             cell03.setImage(new Image(new FileInputStream("src/images/" + field[0][3] + ".png")));

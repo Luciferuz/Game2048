@@ -1,14 +1,18 @@
 package Package;
-
 import javafx.scene.input.KeyEvent;
 
-import java.awt.event.KeyListener;
+import javax.swing.*;
+import java.awt.event.KeyAdapter;
+
 
 public class Controller {
 
-    //public GameField gameField;
+    private GameField gameField;
+    private Graphics userInterface;
+
 
     public void keyboardPress(KeyEvent keyEvent) { //не работает, исправить
+
         System.out.println("кнопка на клавиатуре");
         System.out.println(keyEvent.getCode().isArrowKey());
         System.out.println(keyEvent.getCode().getChar());
@@ -42,18 +46,30 @@ public class Controller {
     }
 
     public void right() {
-        //right();
+        gameField.right();
+        userInterface.updateUI();
     }
 
     public void up() {
-        //up();
+        gameField.up();
+        userInterface.updateUI();
     }
 
     public void left() {
-        //left();
+        gameField.left();
+        userInterface.updateUI();
     }
 
     public void down() {
-        //down();
+        gameField.down();
+        userInterface.updateUI();
+    }
+
+    public void setGameField(GameField gameField) {
+        this.gameField = gameField;
+    }
+
+    public void setGraphics(Graphics userInterface) {
+        this.userInterface = userInterface;
     }
 }
