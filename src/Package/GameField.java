@@ -72,6 +72,21 @@ public class GameField {
                 }
                 break;
             }
+            case DOWN: {
+                for (int x = 0; x < countCellsX; x++) {
+                    int[] newArray = new int[countCellsY];
+                    int index = newArray.length - 1;
+                    for (int y = newArray.length - 1; y >= 0; y--) {
+                        if (field[x][y] != 0) {
+                            newArray[index] = field[x][y];
+                            index--;
+                        }
+                    }
+                    for (int i = index; i >= 0; i--) newArray[i] = 0;
+                    setColumn(x, ifNeedSum(newArray, direction));
+                }
+                break;
+            }
             case LEFT: {
                 for (int y = 0; y < countCellsY; y++) {
                     int[] newArray = new int[countCellsX];
@@ -99,21 +114,6 @@ public class GameField {
                     }
                     for (int i = index; i >= 0; i--) newArray[i] = 0;
                     setLine(y, ifNeedSum(newArray, direction));
-                }
-                break;
-            }
-            case DOWN: {
-                for (int x = 0; x < countCellsX; x++) {
-                    int[] newArray = new int[countCellsY];
-                    int index = newArray.length - 1;
-                    for (int y = newArray.length - 1; y >= 0; y--) {
-                        if (field[x][y] != 0) {
-                            newArray[index] = field[x][y];
-                            index--;
-                        }
-                    }
-                    for (int i = index; i >= 0; i--) newArray[i] = 0;
-                    setColumn(x, ifNeedSum(newArray, direction));
                 }
             }
         }
@@ -147,7 +147,6 @@ public class GameField {
                 }
             }
         }
-
         //теперь убираю нули из массива
         int[] newArray = new int[length];
         int index = 0;
@@ -162,62 +161,6 @@ public class GameField {
         return newArray;
     }
 
-    private int[] ifNeedSumOld(int[] array, String direction) { //тут использовать константы чтобы лучше читалось
-        switch (direction) {
-            case "up":
-            case "left": {
-                if (array[countCellsX - 4] == array[countCellsX - 3] && array[countCellsX - 2] == array[countCellsX - 1]) {
-                    array[countCellsX - 4] = array[countCellsX - 4] * 2;
-                    array[countCellsX - 3] = array[countCellsX - 2] * 2;
-                    array[countCellsX - 2] = 0;
-                    array[countCellsX - 1] = 0;
-                }
-                if (array[countCellsX - 4] == array[countCellsX - 3] && array[countCellsX - 2] != array[countCellsX - 1]) {
-                    array[countCellsX - 4] = array[countCellsX - 4] * 2;
-                    array[countCellsX - 3] = array[countCellsX - 2];
-                    array[countCellsX - 2] = array[countCellsX - 1];
-                    array[countCellsX - 1] = 0;
-                }
-                if (array[countCellsX - 4] != array[countCellsX - 3] && array[countCellsX - 3] == array[countCellsX - 2]) {
-                    array[countCellsX - 3] = array[countCellsX - 3] * 2;
-                    array[countCellsX - 2] = array[countCellsX - 1];
-                    array[countCellsX - 1] = 0;
-                }
-                if (array[countCellsX - 4] != array[countCellsX - 3] && array[countCellsX - 3] != array[countCellsX - 2] && array[countCellsX - 2] == array[countCellsX - 1]) {
-                    array[countCellsX - 2] = array[countCellsX - 2] * 2;
-                    array[countCellsX - 1] = 0;
-                }
-                break;
-            }
-
-            case "down":
-            case "right": {
-                if (array[countCellsY - 1] == array[countCellsY - 2] && array[countCellsY - 3] == array[countCellsY - 4]) {
-                    array[countCellsY - 1] = array[countCellsY - 1] * 2;
-                    array[countCellsY - 2] = array[countCellsY - 3] * 2;
-                    array[countCellsY - 3] = 0;
-                    array[countCellsY - 4] = 0;
-                }
-                if (array[countCellsY - 1] == array[countCellsY - 2] && array[countCellsY - 3] != array[countCellsY - 4]) {
-                    array[countCellsY - 1] = array[countCellsY - 1] * 2;
-                    array[countCellsY - 2] = array[countCellsY - 3];
-                    array[countCellsY - 3] = array[countCellsY - 4];
-                    array[countCellsY - 4] = 0;
-                }
-                if (array[countCellsY - 1] != array[countCellsY - 2] && array[countCellsY - 2] == array[countCellsY - 3]) {
-                    array[countCellsY - 2] = array[countCellsY - 2] * 2;
-                    array[countCellsY - 3] = array[countCellsY - 4];
-                    array[countCellsY - 4] = 0;
-                }
-                if (array[countCellsY - 1] != array[countCellsY - 2] && array[countCellsY - 2] != array[countCellsY - 3] && array[countCellsY - 3] == array[countCellsY - 4]) {
-                    array[countCellsY - 3] = array[countCellsY - 3] * 2;
-                    array[countCellsY - 4] = 0;
-                }
-            }
-        }
-        return array;
-    }
-
     private void setLine(int y, int[] line) {
         for (int x = 0; x < countCellsX; x++) {
             field[x][y] = line[x];
@@ -225,9 +168,7 @@ public class GameField {
     }
 
     private void setColumn(int x, int[] column) {
-        for (int y = 0; y < countCellsY; y++) {
-            field[x][y] = column[y];
-        }
+        if (countCellsY >= 0) System.arraycopy(column, 0, field[x], 0, countCellsY);
     }
 
     private int[][] setArray(int[][] array) {
@@ -277,4 +218,5 @@ public class GameField {
     public int[][] getField() {
         return field;
     }
+
 }

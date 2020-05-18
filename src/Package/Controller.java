@@ -1,18 +1,32 @@
 package Package;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.FlowPane;
 
-import javax.swing.*;
-import java.awt.event.KeyAdapter;
-
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Objects;
 
 public class Controller {
 
+    public FlowPane flowPane;
     private GameField gameField;
     private Graphics userInterface;
+    private int[][] field = gameField.getField();
+
+    public void setImagesFlowPane(int countX, int countY) throws FileNotFoundException {
+        for (int x = 0; x < countX; x++) {
+            for (int y = 0; y < countY; y++) {
+                ImageView newImage = new ImageView();
+                newImage.setImage(new Image(new FileInputStream("src/images/" + field[x][y] + ".png")));
+                flowPane.getChildren().add(newImage);
+            }
+        }
+    }
 
 
     public void keyboardPress(KeyEvent keyEvent) { //не работает, исправить
-
         System.out.println("кнопка на клавиатуре");
         System.out.println(keyEvent.getCode().isArrowKey());
         System.out.println(keyEvent.getCode().getChar());

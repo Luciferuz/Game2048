@@ -30,6 +30,14 @@ public class Graphics {
     }
 
     public void updateUI() {
+
+        for (int x = 0; x< 4; x++) {
+            for (int y=0; y<4; y++) {
+                System.out.print(field[x][y]);
+            }
+            System.out.println();
+        }
+
         try {
             cell00.setImage(new Image(new FileInputStream("src/images/" + field[0][0] + ".png"))); //лучше в hashmap
             cell01.setImage(new Image(new FileInputStream("src/images/" + field[0][1] + ".png")));
