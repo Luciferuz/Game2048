@@ -1,63 +1,64 @@
 package Package;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Graphics {
 
-    public ImageView cell00;
-    public ImageView cell10;
-    public ImageView cell20;
-    public ImageView cell30;
-    public ImageView cell01;
-    public ImageView cell11;
-    public ImageView cell21;
-    public ImageView cell31;
-    public ImageView cell02;
-    public ImageView cell12;
-    public ImageView cell22;
-    public ImageView cell32;
-    public ImageView cell03;
-    public ImageView cell13;
-    public ImageView cell23;
-    public ImageView cell33;
+    private GameField gamefield;
+    private ImageView[][] images;
+    private Map<Integer, Image> picturesMap;
 
-    private int[][] field;
+    public Graphics(GameField gamefield) throws FileNotFoundException {
+        this.gamefield = gamefield;
 
-    public Graphics(int[][] field) {
-        this.field = field;
+        int countX = gamefield.getCountCellsX();
+        int countY = gamefield.getCountCellsY();
+        images = new ImageView[countX][countY];
+
+        for (int y = 0; y < countY; y++) {  //создаю  массив images
+            for (int x = 0; x < countX; x++) {
+                ImageView newImage = new ImageView();
+                newImage.setImage(new Image(new FileInputStream("src/images/" + gamefield.getCell(x, y) + ".png")));
+                newImage.setFitWidth(320.0/countX);
+                newImage.setFitHeight(320.0/countY);
+                images[x][y] = newImage;
+            }
+        }
+
+        setPicturesMap();
+    }
+
+    private void setPicturesMap() throws FileNotFoundException {
+        picturesMap = new HashMap<>();
+        picturesMap.put(0, new Image(new FileInputStream("src/images/0.png")));
+        picturesMap.put(2, new Image(new FileInputStream("src/images/2.png")));
+        picturesMap.put(4, new Image(new FileInputStream("src/images/4.png")));
+        picturesMap.put(8, new Image(new FileInputStream("src/images/8.png")));
+        picturesMap.put(16, new Image(new FileInputStream("src/images/16.png")));
+        picturesMap.put(32, new Image(new FileInputStream("src/images/32.png")));
+        picturesMap.put(64, new Image(new FileInputStream("src/images/64.png")));
+        picturesMap.put(128, new Image(new FileInputStream("src/images/128.png")));
+        picturesMap.put(256, new Image(new FileInputStream("src/images/256.png")));
+        picturesMap.put(512, new Image(new FileInputStream("src/images/512.png")));
+        picturesMap.put(1024, new Image(new FileInputStream("src/images/1024.png")));
+        picturesMap.put(2048, new Image(new FileInputStream("src/images/2048.png")));
+    }
+
+    public ImageView[][] getImages(){
+        return images;
     }
 
     public void updateUI() {
-
-        for (int x = 0; x< 4; x++) {
-            for (int y=0; y<4; y++) {
-                System.out.print(field[x][y]);
+        for (int y = 0; y < gamefield.getCountCellsY(); y++) {
+            for (int x = 0; x < gamefield.getCountCellsX(); x++) {
+                int value = gamefield.getCell(x, y);
+                images[x][y].setImage(picturesMap.get(value));
             }
-            System.out.println();
-        }
-
-        try {
-            cell00.setImage(new Image(new FileInputStream("src/images/" + field[0][0] + ".png"))); //лучше в hashmap
-            cell01.setImage(new Image(new FileInputStream("src/images/" + field[0][1] + ".png")));
-            cell02.setImage(new Image(new FileInputStream("src/images/" + field[0][2] + ".png")));
-            cell03.setImage(new Image(new FileInputStream("src/images/" + field[0][3] + ".png")));
-            cell10.setImage(new Image(new FileInputStream("src/images/" + field[1][0] + ".png")));
-            cell11.setImage(new Image(new FileInputStream("src/images/" + field[1][1] + ".png")));
-            cell12.setImage(new Image(new FileInputStream("src/images/" + field[1][2] + ".png")));
-            cell13.setImage(new Image(new FileInputStream("src/images/" + field[1][3] + ".png")));
-            cell20.setImage(new Image(new FileInputStream("src/images/" + field[2][0] + ".png")));
-            cell21.setImage(new Image(new FileInputStream("src/images/" + field[2][1] + ".png")));
-            cell22.setImage(new Image(new FileInputStream("src/images/" + field[2][2] + ".png")));
-            cell23.setImage(new Image(new FileInputStream("src/images/" + field[2][3] + ".png")));
-            cell30.setImage(new Image(new FileInputStream("src/images/" + field[3][0] + ".png")));
-            cell31.setImage(new Image(new FileInputStream("src/images/" + field[3][1] + ".png")));
-            cell32.setImage(new Image(new FileInputStream("src/images/" + field[3][2] + ".png")));
-            cell33.setImage(new Image(new FileInputStream("src/images/" + field[3][3] + ".png")));
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         }
     }
 }

@@ -1,33 +1,41 @@
 package Package;
-import javafx.scene.image.Image;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.FlowPane;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.Objects;
 
 public class Controller {
 
     public FlowPane flowPane;
+    public ComboBox comboBoxXCells;
+    public ComboBox comboBoxYCells;
+    public ComboBox comboBoxWinCase;
+
     private GameField gameField;
     private Graphics userInterface;
-    private int[][] field = gameField.getField();
+    private int countX;
+    private int countY;
+    private int winCase;
 
-    public void setImagesFlowPane(int countX, int countY) throws FileNotFoundException {
-        for (int x = 0; x < countX; x++) {
-            for (int y = 0; y < countY; y++) {
-                ImageView newImage = new ImageView();
-                newImage.setImage(new Image(new FileInputStream("src/images/" + field[x][y] + ".png")));
-                flowPane.getChildren().add(newImage);
+    public void setImagesFlowPane() {
+        flowPane.getChildren().clear();
+        ImageView[][] images = userInterface.getImages();
+        for (int y = 0; y < gameField.getCountCellsX(); y++) {
+            for (int x = 0; x < gameField.getCountCellsY(); x++) {
+                flowPane.getChildren().add(images[x][y]);
             }
         }
     }
 
-
+    @FXML
     public void keyboardPress(KeyEvent keyEvent) { //не работает, исправить
         System.out.println("кнопка на клавиатуре");
+        System.out.println("Key Pressed"); // print a message
         System.out.println(keyEvent.getCode().isArrowKey());
         System.out.println(keyEvent.getCode().getChar());
         switch (keyEvent.getCode()) {
@@ -45,18 +53,13 @@ public class Controller {
             }
             case D: {
                 right();
-                break;
             }
         }
     }
 
     public void exit() {
-        System.out.println("Нажата кнопка выхода, надо включить первый стартовый экран и очитстить поле до этого");
+        System.out.println("Нажата кнопка выхода, надо включить первый стартовый экран");
         System.exit(0);
-    }
-
-    public void startGame() {
-
     }
 
     public void right() {
@@ -85,5 +88,32 @@ public class Controller {
 
     public void setGraphics(Graphics userInterface) {
         this.userInterface = userInterface;
+        setImagesFlowPane();
+    }
+
+    public void setStartScreen() {
+        ObservableList<Integer> listXY = FXCollections.observableArrayList(3,4,5,6,7,8,9,10);
+        ObservableList<Integer> listWinCase = FXCollections.observableArrayList(32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536);
+        comboBoxXCells.setItems(listXY);
+        comboBoxYCells.setItems(listXY);
+        comboBoxWinCase.setItems(listWinCase);
+    }
+
+    public void startGame() {
+        winCase = (int) comboBoxWinCase.getValue();
+        countX = (int) comboBoxXCells.getValue();
+        countY = (int) comboBoxYCells.getValue();
+    }
+
+    public int getCountX() {
+        return countX;
+    }
+
+    public int getCountY() {
+        return countY;
+    }
+
+    public int getWinCase() {
+        return winCase;
     }
 }

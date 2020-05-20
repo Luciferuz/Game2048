@@ -13,15 +13,29 @@ public class GameField {
         countCellsX = countX;
         countCellsY = countY;
         winCase = winSum;
+    }
+
+    public void newGame() {
         clear();
         createNewCell();
         createNewCell();
     }
 
+    int getRandomX() {
+        return (int) (Math.random() * countCellsX);
+    }
+
+    int getRandomY() {
+        return (int) (Math.random() * countCellsY);
+    }
+
     private void createNewCell() {
+        if (isWinEndOfGame())   System.out.println("Набралось число" + winCase + ", победа");
+        if (noMoreEmptyCells()) System.out.println("Не осталось свободных ячеек, проигрыш");
+
         while (true) {
-            int x = (int) (Math.random() * countCellsX);
-            int y = (int) (Math.random() * countCellsY);
+            int x = getRandomX();
+            int y = getRandomY();
             if (field[x][y] == 0) {
                 field[x][y] = 2;
                 break;
@@ -31,9 +45,9 @@ public class GameField {
 
     private void clear() {
         field = new int[countCellsX][countCellsY];
-        for (int i = 0; i < field.length; i++) {
-            for (int j = 0; j < field.length; j++) {
-                field[i][j] = 0;
+        for (int x = 0; x < countCellsY; x++) {
+            for (int y = 0; y < countCellsY; y++) {
+                field[x][y] = 0;
             }
         }
     }
@@ -72,21 +86,6 @@ public class GameField {
                 }
                 break;
             }
-            case DOWN: {
-                for (int x = 0; x < countCellsX; x++) {
-                    int[] newArray = new int[countCellsY];
-                    int index = newArray.length - 1;
-                    for (int y = newArray.length - 1; y >= 0; y--) {
-                        if (field[x][y] != 0) {
-                            newArray[index] = field[x][y];
-                            index--;
-                        }
-                    }
-                    for (int i = index; i >= 0; i--) newArray[i] = 0;
-                    setColumn(x, ifNeedSum(newArray, direction));
-                }
-                break;
-            }
             case LEFT: {
                 for (int y = 0; y < countCellsY; y++) {
                     int[] newArray = new int[countCellsX];
@@ -115,6 +114,22 @@ public class GameField {
                     for (int i = index; i >= 0; i--) newArray[i] = 0;
                     setLine(y, ifNeedSum(newArray, direction));
                 }
+                break;
+            }
+            case DOWN: {
+                for (int x = 0; x < countCellsX; x++) {
+                    int[] newArray = new int[countCellsY];
+                    int index = newArray.length - 1;
+                    for (int y = newArray.length - 1; y >= 0; y--) {
+                        if (field[x][y] != 0) {
+                            newArray[index] = field[x][y];
+                            index--;
+                        }
+                    }
+                    for (int i = index; i >= 0; i--) newArray[i] = 0;
+                    setColumn(x, ifNeedSum(newArray, direction));
+                }
+                break;
             }
         }
         if (isMoved(beforeMove, field)) createNewCell();
@@ -145,19 +160,39 @@ public class GameField {
                         i--;
                     }
                 }
+                break;
             }
         }
         //теперь убираю нули из массива
         int[] newArray = new int[length];
-        int index = 0;
-        for (int value : array) {
-            if (value != 0) {
-                newArray[index] = value;
-                index++;
+
+        switch (direction) {
+            case UP:
+            case LEFT: {
+                int index = 0;
+                for (int value : array) {
+                    if (value != 0) {
+                        newArray[index] = value;
+                        index++;
+                    }
+                }
+                for (int i = index; i < length; i++) newArray[i] = 0;
+                break;
+            }
+
+            case DOWN:
+            case RIGHT: {
+                int index = length - 1;
+                for (int i = index; i >= 0; i--) {
+                    if (array[i] != 0) {
+                        newArray[index] = array[i];
+                        index--;
+                    }
+                }
+                for (int i = index; i == 0; i--) newArray[i] = 0;
+                break;
             }
         }
-        for (int i = index; i < length; i++) newArray[i] = 0;
-
         return newArray;
     }
 
@@ -188,13 +223,6 @@ public class GameField {
         return false;
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////
-    //          куда-нибудь добавить проверку                                                   //
-    //                                                                                          //
-    //  if (isWinEndOfGame())   System.out.println("Набралось число 2048, победа");             //
-    //  if (noMoreEmptyCells()) System.out.println("Не осталось свободных ячеек, проигрыш");    //
-    //////////////////////////////////////////////////////////////////////////////////////////////
-
     private boolean isWinEndOfGame() {
         //проверяю все ячейки на наличие ыигрышной
         for (int x = 0; x < countCellsX; x++) {
@@ -215,8 +243,20 @@ public class GameField {
         return true;
     }
 
-    public int[][] getField() {
+    int[][] getField() {
         return field;
+    }
+
+    public int getCell(int x, int y) {
+        return field[x][y];
+    }
+
+    public int getCountCellsX() {
+        return countCellsX;
+    }
+
+    public int getCountCellsY() {
+        return countCellsY;
     }
 
 }
