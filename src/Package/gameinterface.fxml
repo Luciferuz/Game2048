@@ -5,8 +5,92 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyboardPress" prefHeight="393.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Package.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" onKeyPressed="#keyboardPress" minHeight="-Infinity" minWidth="-Infinity" prefHeight="393.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Package.Controller">
    <children>
+      <FlowPane onKeyPressed="#keyboardPress" fx:id="flowPane" hgap="5.0" prefHeight="393.0" prefWidth="369.0" vgap="5.0">
+         <children>
+            <ImageView  fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/0.png" />
+               </image>
+            </ImageView>
+            <ImageView  fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/0.png" />
+               </image>
+            </ImageView>
+            <ImageView  fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/0.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/0.png" />
+               </image>
+            </ImageView>
+            <ImageView  fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/0.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/0.png" />
+               </image>
+            </ImageView>
+            <ImageView  fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/0.png" />
+               </image>
+            </ImageView>
+            <ImageView  fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/0.png" />
+               </image>
+            </ImageView>
+            <ImageView  fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/0.png" />
+               </image>
+            </ImageView>
+            <ImageView  fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/0.png" />
+               </image>
+            </ImageView>
+            <ImageView  fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/0.png" />
+               </image>
+            </ImageView>
+            <ImageView  fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/0.png" />
+               </image>
+            </ImageView>
+            <ImageView  fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/0.png" />
+               </image>
+            </ImageView>
+            <ImageView  fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/0.png" />
+               </image>
+            </ImageView>
+            <ImageView  fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/0.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/0.png" />
+               </image>
+            </ImageView>
+         </children>
+      </FlowPane>
       <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="500.0" layoutY="250.0" onMouseClicked="#right" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/right.png" />
@@ -25,86 +109,6 @@
       <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="440.0" layoutY="310.0" onMouseClicked="#down" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/down.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cell20" fitHeight="80.0" fitWidth="80.0" layoutX="200.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/0.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cell10" fitHeight="80.0" fitWidth="80.0" layoutX="110.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/0.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cell12" fitHeight="80.0" fitWidth="80.0" layoutX="110.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/0.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cell02" fitHeight="80.0" fitWidth="80.0" layoutX="20.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/0.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cell11" fitHeight="80.0" fitWidth="80.0" layoutX="110.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/0.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cell01" fitHeight="80.0" fitWidth="80.0" layoutX="20.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/0.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cell00" fitHeight="80.0" fitWidth="80.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/0.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cell21" fitHeight="80.0" fitWidth="80.0" layoutX="200.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/0.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cell22" fitHeight="80.0" fitWidth="80.0" layoutX="200.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/0.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cell30" fitHeight="80.0" fitWidth="80.0" layoutX="290.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/0.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cell31" fitHeight="80.0" fitWidth="80.0" layoutX="290.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/0.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cell32" fitHeight="80.0" fitWidth="80.0" layoutX="290.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/0.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cell03" fitHeight="80.0" fitWidth="80.0" layoutX="20.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/0.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cell13" fitHeight="80.0" fitWidth="80.0" layoutX="110.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/0.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cell23" fitHeight="80.0" fitWidth="80.0" layoutX="200.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/0.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cell33" fitHeight="80.0" fitWidth="80.0" layoutX="290.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/0.png" />
          </image>
       </ImageView>
       <Text layoutX="423.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2048" wrappingWidth="93.22900390625">

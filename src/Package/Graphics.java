@@ -1,5 +1,6 @@
 package Package;
 
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.io.FileInputStream;
@@ -12,6 +13,8 @@ public class Graphics {
     private GameField gamefield;
     private ImageView[][] images;
     private Map<Integer, Image> picturesMap;
+    private final double WIDTH = 320.0;
+    private final double HEIGHT = 320.0;
 
     public Graphics(GameField gamefield) throws FileNotFoundException {
         this.gamefield = gamefield;
@@ -20,17 +23,16 @@ public class Graphics {
         int countY = gamefield.getCountCellsY();
         images = new ImageView[countX][countY];
 
-        for (int y = 0; y < countY; y++) {  //создаю  массив images
+        setPicturesMap();
+        for (int y = 0; y < countY; y++) {
             for (int x = 0; x < countX; x++) {
                 ImageView newImage = new ImageView();
-                newImage.setImage(new Image(new FileInputStream("src/images/" + gamefield.getCell(x, y) + ".png")));
-                newImage.setFitWidth(320.0/countX);
-                newImage.setFitHeight(320.0/countY);
+                newImage.setImage(picturesMap.get(gamefield.getCell(x, y)));
+                newImage.setFitWidth(WIDTH/countX);
+                newImage.setFitHeight(HEIGHT/countY);
                 images[x][y] = newImage;
             }
         }
-
-        setPicturesMap();
     }
 
     private void setPicturesMap() throws FileNotFoundException {
@@ -60,5 +62,23 @@ public class Graphics {
                 images[x][y].setImage(picturesMap.get(value));
             }
         }
+        checkLoseAlert();
     }
+
+    private void checkLoseAlert() {
+        if (!gamefield.isThereMoves()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("2048");
+            alert.setHeaderText("Игра закончена!");
+            alert.show();
+        }
+    }
+
+    public void setWinAlert() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("2048");
+        alert.setHeaderText("Вы выиграли! Выигрышная ячейка увеличена до " + gamefield.getWinCase());
+        alert.show();
+    }
+
 }

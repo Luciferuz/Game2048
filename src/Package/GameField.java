@@ -30,9 +30,6 @@ public class GameField {
     }
 
     private void createNewCell() {
-        if (isWinEndOfGame())   System.out.println("Набралось число" + winCase + ", победа");
-        if (noMoreEmptyCells()) System.out.println("Не осталось свободных ячеек, проигрыш");
-
         while (true) {
             int x = getRandomX();
             int y = getRandomY();
@@ -45,7 +42,7 @@ public class GameField {
 
     private void clear() {
         field = new int[countCellsX][countCellsY];
-        for (int x = 0; x < countCellsY; x++) {
+        for (int x = 0; x < countCellsX; x++) {
             for (int y = 0; y < countCellsY; y++) {
                 field[x][y] = 0;
             }
@@ -165,7 +162,6 @@ public class GameField {
         }
         //теперь убираю нули из массива
         int[] newArray = new int[length];
-
         switch (direction) {
             case UP:
             case LEFT: {
@@ -223,8 +219,8 @@ public class GameField {
         return false;
     }
 
-    private boolean isWinEndOfGame() {
-        //проверяю все ячейки на наличие ыигрышной
+    public boolean isWinEndOfGame() {
+        //проверяю все ячейки на наличие выигрышной
         for (int x = 0; x < countCellsX; x++) {
             for (int y = 0; y < countCellsY; y++) {
                 if (field[x][y] == winCase) return true;
@@ -233,14 +229,26 @@ public class GameField {
         return false;
     }
 
-    private boolean noMoreEmptyCells() {
+    private boolean isThereEmptyCells() {
         //проверяю все ячейки на наличие пустой/свободной
         for (int x = 0; x < countCellsX; x++) {
             for (int y = 0; y < countCellsY; y++) {
-                if (field[x][y] == 0) return false;
+                if (field[x][y] == 0) return true;
             }
         }
-        return true;
+        return false;
+    }
+
+    public boolean isThereMoves() {
+        if (isThereEmptyCells()) return true;
+        for (int y = 0; y < countCellsY; y++) { //прохожусь по строкам
+            for (int x = 0; x < countCellsX - 1; x++) if (getCell(x, y) == getCell(x + 1, y) || getCell(x, y) == 0) return true;
+        }
+
+        for (int x = 0; x < countCellsX; x++) { //прохожусь по столбцам
+            for (int y = 0; y < countCellsY - 1; y++) if (getCell(x, y) == getCell(x, y + 1)) return true;
+        }
+        return false;
     }
 
     int[][] getField() {
@@ -259,4 +267,11 @@ public class GameField {
         return countCellsY;
     }
 
+    public int getWinCase() {
+        return winCase;
+    }
+
+    public void setWinCase(int newWinCase) {
+        winCase = newWinCase;
+    }
 }
